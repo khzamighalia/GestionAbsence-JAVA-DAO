@@ -1,0 +1,97 @@
+Button{
+    -fx-background-radius: 6, 5;
+    -fx-background-insets: 0, 1;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 );
+    -fx-font-weight: Bold;
+    -fx-font-family : Calibri;
+    -fx-font-size :16px;
+
+}/*
+#Color1 {
+    -fx-background-color:
+        linear-gradient(#f0ff35, #a9ff00),
+        radial-gradient(center 50% -40%, radius 200%, #1A3263 45%, #1A3263 50%);
+        -fx-text-fill: White;
+
+}
+#Color2 {
+    -fx-background-color:
+        linear-gradient(#f0ff35, #a9ff00),
+        radial-gradient(center 50% -40%, radius 200%, #F5564E 45%, #F5564E 50%);
+        -fx-text-fill: #395306;
+
+}
+#Color3 {
+    -fx-background-color:
+        linear-gradient(#f0ff35, #a9ff00),
+        radial-gradient(center 50% -40%, radius 200%, #FAB95B 45%, #FAB95B 50%);
+        -fx-text-fill: #395306;
+
+}
+#Color5 {
+    -fx-background-color:
+        linear-gradient(#f0ff35, #a9ff00),
+        radial-gradient(center 50% -40%, radius 200%, #FFFFFF 45%, #FFFFFF 50%);
+        -fx-text-fill: #395306;
+
+}
+*/
+#Btn1,#Btn2,#Btn3,#Btn4,#Btn5,#Btn6,#Btn7,#Btn10,#Btn11,#Btn12{
+    -fx-background-color:
+        linear-gradient(#f0ff35, #a9ff00),
+        radial-gradient(center 50% -40%, radius 200%, #E8E2DB 45%, #E8E2DB 50%);
+        -fx-text-fill: #395306;
+
+}
+
+
+#red,#BtnAT1,#BtnAT2 ,#BtnAT3 ,#BtnAT4,#red1{
+    -fx-background-color:
+        linear-gradient(#ffffcf, #ffffcf),
+        radial-gradient(center 50% -40%, radius 200%, #b53d00 45%, #b53d00 50%);
+        -fx-text-fill: white;
+        -fx-font-size : 12px;
+
+}
+#yellow,#BtnA1,#BtnA2,#BtnA3,#BtnA4 {
+    -fx-background-color:
+        linear-gradient(#ff0000, #ff0000),
+        radial-gradient(center 50% -40%, radius 200%, #ff0000 45%, #ff0000 50%);
+        -fx-text-fill:white;
+        -fx-font-size : 12px;
+
+}
+
+#orange,#BtnR1,#BtnR2,#BtnR3,#BtnR4 {
+    -fx-background-color:
+        linear-gradient(#e67e00, #e67e00),
+        radial-gradient(center 50% -40%, radius 200%, #999999 45%, #999999 50%);
+        -fx-text-fill: white;
+    -fx-font-size : 12px;
+}
+
+
+
+#progA1,#progA2,#progA3,#progA4,#progGlo2{
+     -fx-accent: red;
+ }
+
+#progP1,#progP2,#progP3,#progP4,#progGlo1{
+    -fx-accent:  #00ff00 ;
+}
+
+#green,#green1 {
+    -fx-background-color:
+        linear-gradient(#00ff00, #00ff00),
+        radial-gradient(center 50% -40%, radius 200%, #00ff00 45%, #00ff00 50%);
+        -fx-text-fill: #395306;
+}
+
+Label{
+-fx-font-size : 14px;
+-fx-font-weight:400;
+
+}
+
+
+

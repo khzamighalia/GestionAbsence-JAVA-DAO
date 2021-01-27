@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="youcodesafi.ma.handlingyoucodeabsencesystem.DetailsController">
+   <children>
+      <TextField fx:id="current_ApprenantFullname" editable="false" layoutX="15.0" layoutY="56.0" />
+      <TextField fx:id="current_ApprenantPromotion" editable="false" layoutX="15.0" layoutY="109.0" />
+      <Label layoutX="15.0" layoutY="39.0" text="Apprenant Fullname" />
+      <Label layoutX="15.0" layoutY="92.0" text="Apprenant Promotion" />
+      <Button layoutX="15.0" layoutY="202.0" mnemonicParsing="false" onAction="#handleAbsenceSaveButton" text="Save" />
+      <Label layoutX="15.0" layoutY="150.0" text="How Many  Hour" />
+      <Label fx:id="statusOutput" alignment="CENTER" contentDisplay="CENTER" textAlignment="CENTER" textFill="#b51111">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button layoutX="131.0" layoutY="201.0" mnemonicParsing="false" onAction="#handlePreviousOperation" text="back" />
+      <ComboBox fx:id="hours" layoutX="15.0" layoutY="167.0" prefWidth="150.0" />
+   </children>
+</AnchorPane>
