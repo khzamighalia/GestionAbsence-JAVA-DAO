@@ -31,6 +31,10 @@ public class Staff extends Person {
     public Staff(long idPerson, String fullname) {
         super(idPerson, fullname);
     }
+    public Staff( String fullname, String phone, String email, String username, String password, Role role,int idType) {
+        super(fullname, phone, email, username, password, role);
+        this.idType=idType;
+    }
     
     
 

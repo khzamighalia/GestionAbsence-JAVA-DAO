@@ -1,0 +1,379 @@
+CREATE DATABASE  IF NOT EXISTS `handlingyasvbetav2` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `handlingyasvbetav2`;
+
+
+
+--
+-- Table structure for table `absencebyclass`
+--
+
+DROP TABLE IF EXISTS `absencebyclass`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `absencebyclass` (
+  `id_AbsenceByClass` int NOT NULL AUTO_INCREMENT,
+  `Stu_idPerson` int NOT NULL,
+  `idClass` int NOT NULL,
+  `Date_Absence` date DEFAULT NULL,
+  `Nbr_Hours` int DEFAULT NULL,
+  `Justification` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`id_AbsenceByClass`),
+  KEY `FK_absenceByClass` (`idClass`),
+  CONSTRAINT `FK_absenceByClass` FOREIGN KEY (`idClass`) REFERENCES `classroom` (`idClass`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `absencebyclass`
+--
+
+LOCK TABLES `absencebyclass` WRITE;
+/*!40000 ALTER TABLE `absencebyclass` DISABLE KEYS */;
+INSERT INTO `absencebyclass` VALUES (1,3,1,'2020-02-15',2,NULL),(2,3,1,'2020-07-21',5,NULL),(3,4,2,'2020-07-21',5,NULL),(4,4,2,'2020-10-22',7,NULL);
+/*!40000 ALTER TABLE `absencebyclass` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `administrator`
+--
+
+DROP TABLE IF EXISTS `administrator`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `administrator` (
+  `idPerson` int NOT NULL,
+  PRIMARY KEY (`idPerson`),
+  CONSTRAINT `FK_ADMINPERSON` FOREIGN KEY (`idPerson`) REFERENCES `person` (`idPerson`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `administrator`
+--
+
+LOCK TABLES `administrator` WRITE;
+/*!40000 ALTER TABLE `administrator` DISABLE KEYS */;
+/*!40000 ALTER TABLE `administrator` ENABLE KEYS */;
+UNLOCK TABLES;
+Select * from administrator
+--
+-- Table structure for table `belongtopromotion`
+--
+
+DROP TABLE IF EXISTS `belongtopromotion`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `belongtopromotion` (
+  `id_AbsenceByPromo` int NOT NULL AUTO_INCREMENT,
+  `Stu_idPerson` int NOT NULL,
+  `idPromo` int NOT NULL,
+  `Date_Absence` date DEFAULT NULL,
+  `Nbr_Hours` int DEFAULT NULL,
+  `Justification` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`id_AbsenceByPromo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `belongtopromotion`
+--
+
+LOCK TABLES `belongtopromotion` WRITE;
+/*!40000 ALTER TABLE `belongtopromotion` DISABLE KEYS */;
+/*!40000 ALTER TABLE `belongtopromotion` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `classroom`
+--
+
+DROP TABLE IF EXISTS `classroom`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `classroom` (
+  `idClass` int NOT NULL AUTO_INCREMENT,
+  `idPerson` int NOT NULL,
+  `idType` int NOT NULL,
+  `titleClass` varchar(254) DEFAULT NULL,
+  PRIMARY KEY (`idClass`),
+  KEY `FK_association5` (`idType`),
+  KEY `FK_staffSuperviseClass` (`idPerson`),
+  CONSTRAINT `FK_association5` FOREIGN KEY (`idType`) REFERENCES `type` (`idType`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `FK_staffSuperviseClass` FOREIGN KEY (`idPerson`) REFERENCES `staff` (`idPerson`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `classroom`
+--
+
+LOCK TABLES `classroom` WRITE;
+/*!40000 ALTER TABLE `classroom` DISABLE KEYS */;
+INSERT INTO `classroom` VALUES (1,6,1,'ALAN TURING'),(2,7,1,'ADA LOVELACE');
+/*!40000 ALTER TABLE `classroom` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `groupes`
+--
+
+DROP TABLE IF EXISTS `groupes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `groupes` (
+  `idGroup` int NOT NULL AUTO_INCREMENT,
+  `titleGroup` varchar(50) NOT NULL DEFAULT 'VARCHAR',
+  PRIMARY KEY (`idGroup`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `groupes`
+--
+
+LOCK TABLES `groupes` WRITE;
+/*!40000 ALTER TABLE `groupes` DISABLE KEYS */;
+INSERT INTO `groupes` VALUES (1,'GROUP 1'),(2,'GROUP 2'),(3,'GROUP 3'),(4,'GROUP 4'),(5,'GROUP 5'),(6,'GROUP 6');
+/*!40000 ALTER TABLE `groupes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `person`
+--
+
+DROP TABLE IF EXISTS `person`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `person` (
+  `idPerson` int NOT NULL AUTO_INCREMENT,
+  `fullname` varchar(254) DEFAULT NULL,
+  `phone` varchar(254) DEFAULT NULL,
+  `email` varchar(254) DEFAULT NULL,
+  `username` varchar(254) DEFAULT NULL,
+  `password` varchar(254) DEFAULT NULL,
+  `role` varchar(254) DEFAULT NULL,
+  PRIMARY KEY (`idPerson`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `person`
+--
+
+LOCK TABLES `person` WRITE;
+/*!40000 ALTER TABLE `person` DISABLE KEYS */;
+INSERT INTO `person` VALUES (1,'AMIMI JAMAL','05XXXXXXXX','AMIMIJAMAL@YoucodeSAFI.ma','Amimi Jamal','Amimi Jamal','APPRENANT'),(2,'CHAOUB ACHRAF','06XXXXXXXX','CHAOUBACHRAF@YoucodeSAFI.ma','Chaoub Achraf','Chaoub Achraf','APPRENANT'),(3,'KHZAMI GHALIA','06XXXXXXXX','KHZAMIGHALIA@YoucodeSAFI.ma','Khzami Ghalia','Khzami Ghalia','APPRENANT'),(4,'BOUTAYEB AHMED','06XXXXXXXX','BOUTAYEBAHMED@YoucodeSAFI.ma','Boutayeb Ahmed','Boutayeb Ahmed','APPRENANT'),(5,'EL WAHABI HANAE','07XXXXXXXX','ELWAHABIHANAE@YoucodeSAFI.ma','EL WAHABI HANAE','EL WAHABI HANAE','STAFF'),(6,'ECHCHADI YOUNESS','07XXXXXXXX','ECHCHADIYOUNESS@YoucodeSAFI.ma','ECHCHADI YOUNESS','ECHCHADI YOUNESS','STAFF'),(7,'SEDRAOUI FATIMA EZZAHRA','07XXXXXXXX','SEDRAOUIFATIMAEZZAHRA@YoucodeSAFI.ma','SEDRAOUI FATIMA EZZAHRA','SEDRAOUI FATIMA EZZAHRA','STAFF'),(8,'ADMINISTRATOR','044XXXXXXX','ADMINISTRATOR@YoucodeSAFI.ma','ADMINISTRATOR','ADMINISTRATOR','ADMINISTRATOR'),(9,'SECRETARY 1','044XXXXXXX','SECRETARY1@YoucodeSAFI.ma','SECRETARY_1','SECRETARY_1','SECRETARY'),(10,'SECRETARY 2','044XXXXXXX','SECRETARY2@YoucodeSAFI.ma','SECRETARY_2','SECRETARY_2','SECRETARY');
+/*!40000 ALTER TABLE `person` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `promo`
+--
+
+DROP TABLE IF EXISTS `promo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `promo` (
+  `idPromo` int NOT NULL AUTO_INCREMENT,
+  `idPerson` int NOT NULL,
+  `idSpeciality` int NOT NULL,
+  `idType` int NOT NULL,
+  `idReferencial` int NOT NULL,
+  `titlePromotion` varchar(254) NOT NULL,
+  `dateCreation` datetime NOT NULL,
+  `dateExpiration` datetime NOT NULL,
+  `descrption` varchar(254) NOT NULL,
+  PRIMARY KEY (`idPromo`),
+  KEY `FK_promoHaveReferencial` (`idReferencial`),
+  KEY `FK_promoHaveSpeciality` (`idSpeciality`),
+  KEY `FK_promoType` (`idType`),
+  KEY `FK_staffSupervisePromo` (`idPerson`),
+  CONSTRAINT `FK_promoHaveReferencial` FOREIGN KEY (`idReferencial`) REFERENCES `referencial` (`idReferencial`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `FK_promoHaveSpeciality` FOREIGN KEY (`idSpeciality`) REFERENCES `speciality` (`idSpeciality`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `FK_promoType` FOREIGN KEY (`idType`) REFERENCES `type` (`idType`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `FK_staffSupervisePromo` FOREIGN KEY (`idPerson`) REFERENCES `staff` (`idPerson`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `promo`
+--
+
+LOCK TABLES `promo` WRITE;
+/*!40000 ALTER TABLE `promo` DISABLE KEYS */;
+INSERT INTO `promo` VALUES (2,5,1,2,3,'YOUCODE SAFI 2020 MARY JACKSON','2020-11-15 00:00:00','2022-08-30 00:00:00','FIRST PROMOTION YOUCODE SAFI MARY JACKSON'),(3,5,1,2,3,'YOUCODE SAFI 2020 MARY JACKSON v2','2020-12-10 00:00:00','2022-09-15 00:00:00','FIRST PROMOTION YOUCODE SAFI MARY JACKSON V2'),(4,5,1,2,3,'YOUCODE SAFI 2020 MARY JACKSON v3','2020-12-10 00:00:00','2022-09-15 00:00:00','FIRST PROMOTION YOUCODE SAFI MARY JACKSON V3');
+/*!40000 ALTER TABLE `promo` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `referencial`
+--
+
+DROP TABLE IF EXISTS `referencial`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `referencial` (
+  `idReferencial` int NOT NULL AUTO_INCREMENT,
+  `referencialTitle` varchar(254) DEFAULT NULL,
+  PRIMARY KEY (`idReferencial`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `referencial`
+--
+
+LOCK TABLES `referencial` WRITE;
+/*!40000 ALTER TABLE `referencial` DISABLE KEYS */;
+INSERT INTO `referencial` VALUES (1,'WEB & MOBILE DEVLOPPER'),(2,'WEB & MOBILE ARCHITECTOR'),(3,'WEB & MOBILE CONCEPTOR');
+/*!40000 ALTER TABLE `referencial` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `secretary`
+--
+
+DROP TABLE IF EXISTS `secretary`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `secretary` (
+  `idPerson` int NOT NULL,
+  PRIMARY KEY (`idPerson`),
+  CONSTRAINT `FK_SECRETARYPERSON` FOREIGN KEY (`idPerson`) REFERENCES `person` (`idPerson`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `secretary`
+--
+
+LOCK TABLES `secretary` WRITE;
+/*!40000 ALTER TABLE `secretary` DISABLE KEYS */;
+INSERT INTO `secretary` VALUES (9),(10);
+/*!40000 ALTER TABLE `secretary` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `speciality`
+--
+
+DROP TABLE IF EXISTS `speciality`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `speciality` (
+  `idSpeciality` int NOT NULL AUTO_INCREMENT,
+  `specialityTitle` varchar(254) DEFAULT NULL,
+  PRIMARY KEY (`idSpeciality`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `speciality`
+--
+
+LOCK TABLES `speciality` WRITE;
+/*!40000 ALTER TABLE `speciality` DISABLE KEYS */;
+INSERT INTO `speciality` VALUES (1,'JEE'),(2,'C#'),(3,'FULL STACK');
+/*!40000 ALTER TABLE `speciality` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `staff`
+--
+
+DROP TABLE IF EXISTS `staff`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `staff` (
+  `idPerson` int NOT NULL,
+  `idType` int NOT NULL,
+  PRIMARY KEY (`idPerson`),
+  KEY `FK_haveAType` (`idType`),
+  CONSTRAINT `FK_haveAType` FOREIGN KEY (`idType`) REFERENCES `type` (`idType`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `FK_STAFFPERSON` FOREIGN KEY (`idPerson`) REFERENCES `person` (`idPerson`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `staff`
+--
+
+LOCK TABLES `staff` WRITE;
+/*!40000 ALTER TABLE `staff` DISABLE KEYS */;
+INSERT INTO `staff` VALUES (6,1),(7,1),(5,2);
+/*!40000 ALTER TABLE `staff` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `student`
+--
+
+DROP TABLE IF EXISTS `student`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `student` (
+  `idPerson` int NOT NULL,
+  `idGroup` int NOT NULL,
+  PRIMARY KEY (`idPerson`),
+  KEY `FK_belongToGroup` (`idGroup`),
+  CONSTRAINT `FK_belongToGroup` FOREIGN KEY (`idGroup`) REFERENCES `groupes` (`idGroup`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `FK_STUDENTPERSON` FOREIGN KEY (`idPerson`) REFERENCES `person` (`idPerson`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `student`
+--
+
+LOCK TABLES `student` WRITE;
+/*!40000 ALTER TABLE `student` DISABLE KEYS */;
+INSERT INTO `student` VALUES (3,1),(4,1),(1,3),(2,3);
+/*!40000 ALTER TABLE `student` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `type`
+--
+
+DROP TABLE IF EXISTS `type`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `type` (
+  `idType` int NOT NULL AUTO_INCREMENT,
+  `title` varchar(254) DEFAULT NULL,
+  PRIMARY KEY (`idType`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `type`
+--
+
+LOCK TABLES `type` WRITE;
+/*!40000 ALTER TABLE `type` DISABLE KEYS */;
+INSERT INTO `type` VALUES (1,'FIRST_YEAR'),(2,'SECOND_YEAR');
+
+
+
+
+
+USE `handlingyasvbetav2`;
+select * from Person
+select * from administrator
+select * from student
+select * from secretary
+select * from staff
+select * from groupes
+INSERT INTO groupes (idGroup,titleGroup) VALUES (1,"A")
+INSERT INTO groupes (idGroup,titleGroup) VALUES (2,"B")
+INSERT INTO groupes (idGroup,titleGroup) VALUES (3,"C")
+INSERT INTO groupes (idGroup,titleGroup) VALUES (4,"D")
+INSERT INTO groupes (idGroup,titleGroup) VALUES (5,"E")
+INSERT INTO groupes (idGroup,titleGroup) VALUES (6,"F")
+
+
+INSERT INTO administrator (idPerson) VALUES (1)
+INSERT INTO type (idType,title) VALUES (1,"1 ere année"),(2,"2 eme année")
+
+ALTER TABLE secretary
+ADD  Classes varchar(254) AFTER idPerson;

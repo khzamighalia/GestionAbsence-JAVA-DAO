@@ -18,6 +18,7 @@ public class Apprenant extends Person {
     private String class_Title;
 
     private int id_Class;
+    private int idGroup;
 
     public Apprenant(long idPerson, String fullname) {
         super(idPerson, fullname);
@@ -32,6 +33,10 @@ public class Apprenant extends Person {
         this.groupe_Title = groupe_ID;
         this.class_Title = class_ID;
         this.id_Class = id_Class;
+    }
+    public Apprenant(String fullname, String phone, String email, String username, String password, Role role,int idGroup) {
+        super(fullname,phone,email,username,password,role);
+        this.idGroup=idGroup;
     }
 
     public String getGroupe_ID() {
@@ -66,6 +71,18 @@ public class Apprenant extends Person {
 
     public void setId_Class(int id_Class) {
         this.id_Class = id_Class;
+    }
+
+   /* public int getIdGroup() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }*/
+    
+     public int getIdGroup() {
+        return idGroup;
+    }
+
+    public void setIdGroup(int idGroup) {
+        this.idGroup = idGroup;
     }
 
 }

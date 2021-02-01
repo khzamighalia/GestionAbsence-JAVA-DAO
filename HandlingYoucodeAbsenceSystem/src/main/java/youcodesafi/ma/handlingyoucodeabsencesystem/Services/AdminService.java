@@ -43,81 +43,11 @@ public class AdminService implements AdminRepository {
      * @throws ClassNotFoundException
      */
     
-   /* public int addUser(Person p) throws SQLException, ClassNotFoundException{
-        
-        
-        
-        
-       	System.out.println("before");
+     public int addUser(Person p) throws SQLException {
         Connection connection = null;
         PreparedStatement statement = null;
         int state = 0;
-        //int id=0; 
-        try {
-            // check if the User Exists Or Not
-            // code goes here :: 
-            /*if (_isPersonExists(p.getEmail(), p.getMatricule())) {
-                System.out.println("Person is Already Exists :frowning: ");
-            } else {*/
-        
-       /* connection = Singleton.getConnection();
-        String query_POST = "INSERT INTO Person (fullname, phone, email,username,password,role) VALUES (?, ?, ?, ?, ?,?)";
-        statement = connection.prepareStatement(query_POST,PreparedStatement.RETURN_GENERATED_KEYS);
-        statement.setString(1, p.getFullname());
-        statement.setString(2, p.getPhone());
-        statement.setString(3, p.getEmail());
-        statement.setString(4, p.getUsername());
-        statement.setString(5,p.getPassword());
-        statement.setString(6,p.getRole().toString());
-        //statement.setString(6, p.getRole());*/
-        
-        //state = statement.executeUpdate();
-        //ResultSet rs=statement.getGeneratedKeys();
-        //id=rs.getInt(1);     
-              /*  if(p.getRole().toString().equals("Administrator")){
-                    String query_POST2 = "INSERT INTO Administrator (idPerson) VALUES (?)";
-                    statement = connection.prepareCall(query_POST2);
-                    statement.setInt(1, id);
-                    state = statement.executeUpdate();
-                   }
-                else if (p.getRole().toString().equals("STAFF")){
-                    String query_POST2 = "INSERT INTO Administrator (idPerson) VALUES (?)";
-                    statement = connection.prepareCall(query_POST2);
-                    statement.setInt(1, id);
-                    state = statement.executeUpdate();
-                   }
-                else if (p.getRole().toString().equals("APPRENANT")){
-                    String query_POST2 = "INSERT INTO Apprenant (idPerson,dGroup) VALUES (?,?)";
-                    statement = connection.prepareCall(query_POST2);
-                    statement.setInt(1, id);
-                    statement.setInt(2,1);
-                    state = statement.executeUpdate();
-                   }
-                else if (p.getRole().toString().equals("SECRETARY")){
-                    String query_POST2 = "INSERT INTO Secretary (idPerson) VALUES (?)";
-                    statement = connection.prepareCall(query_POST2);
-                    statement.setInt(1, id);
-                    state = statement.executeUpdate();
-                   }
-            */
-      /*  } catch (ClassNotFoundException | SQLException e) {
-        } finally {
-            if (connection != null) {
-                connection.close();
-            }
-            if (statement != null) {
-                statement.close();
-            }
-        }
-        return state;
-		
-    }*/
-    
-    @Override
-    public int addUser(Person p) throws SQLException {
-        Connection connection = null;
-        PreparedStatement statement = null;
-        int state = 0;
+        int id=0; 
         try {
             
             // check if the User Exists Or Not
@@ -129,7 +59,7 @@ public class AdminService implements AdminRepository {
            
                 connection = Singleton.getConnection();
                 String query_POST = "INSERT INTO Person (fullname, phone, email,username,password,role) VALUES (?, ?, ?, ?, ?,?)";
-                statement = connection.prepareCall(query_POST);
+                statement = connection.prepareStatement(query_POST,PreparedStatement.RETURN_GENERATED_KEYS);
                 statement.setString(1, p.getFullname());
                 statement.setString(2, p.getPhone());
                 statement.setString(3, p.getEmail());
@@ -137,8 +67,35 @@ public class AdminService implements AdminRepository {
                 statement.setString(5, p.getPassword());
                 statement.setString(6, p.getRole().toString());
                 state = statement.executeUpdate();
-            }
-        } catch (ClassNotFoundException | SQLException e) {
+                ResultSet rs=statement.getGeneratedKeys();
+                while(rs.next()) {
+                id=rs.getInt(1); 
+                }
+                   
+              
+          
+                if(p.getRole().toString().equals("ADMINISTRATOR")){
+                    String query_POST2 = "INSERT INTO administrator (idPerson) VALUES (?)";
+                    statement = connection.prepareCall(query_POST2);
+                    statement.setInt(1, id);
+                    state = statement.executeUpdate();
+                   }
+                else if (p.getRole().toString().equals("STAFF")){
+                    String query_POST2 = "INSERT INTO staff (idPerson,idType) VALUES (?,?)";
+                    statement = connection.prepareCall(query_POST2);
+                    statement.setInt(1, id);
+                    state = statement.executeUpdate();
+                   }
+                else if (p.getRole().toString().equals("SECRETARY")){
+                    String query_POST2 = "INSERT INTO secretary (idPerson) VALUES (?)";
+                    statement = connection.prepareCall(query_POST2);
+                    statement.setInt(1, id);
+                    state = statement.executeUpdate();
+                   }
+              
+            
+     
+            }} catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         } finally {
             if (connection != null) {
@@ -150,6 +107,7 @@ public class AdminService implements AdminRepository {
         }
         return state;
     }
+    
     
     private boolean _isPersonExists(String email, String matricule) throws SQLException {
         Connection connection = null;

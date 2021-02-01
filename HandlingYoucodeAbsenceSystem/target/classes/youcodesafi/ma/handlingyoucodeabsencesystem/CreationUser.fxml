@@ -1,26 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="637.0" prefWidth="965.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="youcodesafi.ma.handlingyoucodeabsencesystem.CreationUserController">
+<AnchorPane id="AnchorPane" prefHeight="605.0" prefWidth="837.0" style="-fx-background-color: #F8F8F8;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="youcodesafi.ma.handlingyoucodeabsencesystem.CreationUserController">
    <children>
-      <VBox prefHeight="637.0" prefWidth="213.0" style="-fx-background-color: red;" />
-      <Button fx:id="CajouterBtn" layoutX="348.0" layoutY="563.0" mnemonicParsing="false" onAction="#AddUserEvent" prefHeight="39.0" prefWidth="460.0" text="Ajouter " />
-      <Label layoutX="288.0" layoutY="170.0" text="Nom complet" />
-      <Label layoutX="288.0" layoutY="231.0" text="Phone" />
-      <Label layoutX="288.0" layoutY="305.0" text="Email" />
-      <Label layoutX="288.0" layoutY="370.0" text="Username" />
-      <Label layoutX="288.0" layoutY="434.0" text="Mot de passe" />
-      <Label layoutX="294.0" layoutY="490.0" text="Role" />
-      <TextField fx:id="Cfullname" layoutX="529.0" layoutY="164.0" />
-      <TextField fx:id="Cphone" layoutX="529.0" layoutY="225.0" />
-      <TextField fx:id="Cemail" layoutX="529.0" layoutY="299.0" />
-      <TextField fx:id="Cusername" layoutX="529.0" layoutY="364.0" />
-      <TextField fx:id="Cpassword" layoutX="529.0" layoutY="428.0" />
-      <TextField fx:id="Crole" layoutX="529.0" layoutY="484.0" />
+      <Button fx:id="CajouterBtn" layoutX="501.0" layoutY="431.0" mnemonicParsing="false" onAction="#AddUserEvent" prefHeight="39.0" prefWidth="116.0" text="Ajouter " />
+      <Label layoutX="228.0" layoutY="170.0" text="Nom complet" />
+      <Label layoutX="228.0" layoutY="201.0" text="Phone" />
+      <Label layoutX="228.0" layoutY="245.0" text="Email" />
+      <Label layoutX="228.0" layoutY="280.0" text="Username" />
+      <Label layoutX="228.0" layoutY="314.0" text="Mot de passe" />
+      <Label layoutX="224.0" layoutY="350.0" text="Role" />
+      <TextField fx:id="Cfullname" layoutX="389.0" layoutY="174.0" />
+      <TextField fx:id="Cphone" layoutX="389.0" layoutY="205.0" />
+      <TextField fx:id="Cemail" layoutX="389.0" layoutY="239.0" />
+      <TextField fx:id="Cusername" layoutX="389.0" layoutY="274.0" />
+      <TextField fx:id="Cpassword" layoutX="389.0" layoutY="308.0" />
+      <ComboBox id="RoleCombo" fx:id="RoleCombo" layoutX="389.0" layoutY="340.0" onAction="#Select" prefHeight="14.0" prefWidth="154.0" promptText="-- Choisissez un role --" />
+      <Text fill="#0031ff" layoutX="217.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Création d'un nouveau utilisateur">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Text>
+      <Label fx:id="LabelGroup" layoutX="224.0" layoutY="390.0" text="Groupe" visible="false" />
+      <Pane prefHeight="98.0" prefWidth="837.0" style="-fx-background-color: #757de8;">
+         <children>
+            <ImageView fitHeight="81.0" fitWidth="344.0" layoutX="6.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/white.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Pane layoutY="97.0" prefHeight="507.0" prefWidth="154.0" style="-fx-background-color: #E8E8E8;">
+         <children>
+            <ImageView fitHeight="185.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/pngAvatar.jpg" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Label fx:id="CAnnee" layoutX="228.0" layoutY="384.0" text="Année" visible="false" />
+      <ComboBox id="RoleCombo" fx:id="AnneeCombo1" layoutX="389.0" layoutY="390.0" prefHeight="14.0" prefWidth="154.0" promptText="-- Choisissez une année --" visible="false" />
+      <CheckBox fx:id="Check4" layoutX="286.0" layoutY="404.0" mnemonicParsing="false" text="Mary Jackson " visible="false" />
+      <CheckBox fx:id="Check5" layoutX="393.0" layoutY="404.0" mnemonicParsing="false" text="Alan Turing" visible="false" />
+      <CheckBox fx:id="Check6" layoutX="521.0" layoutY="404.0" mnemonicParsing="false" text="Margaret Hamilton" visible="false" />
+      <CheckBox fx:id="Check1" layoutX="287.0" layoutY="384.0" mnemonicParsing="false" text="Ada Lovelace " visible="false" />
+      <CheckBox fx:id="Check2" layoutX="393.0" layoutY="384.0" mnemonicParsing="false" text="James Gosling" visible="false" />
+      <CheckBox fx:id="Check3" layoutX="521.0" layoutY="384.0" mnemonicParsing="false" text="Robert Noyce" visible="false" />
+      <Label fx:id="CClasses" layoutX="221.0" layoutY="384.0" text="Classes" visible="false" />
+      <ComboBox fx:id="CGroup" layoutX="391.0" layoutY="378.0" prefHeight="27.0" prefWidth="150.0" promptText="-- Choisissez une classe --" visible="false" />
    </children>
 </AnchorPane>

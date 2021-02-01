@@ -14,6 +14,7 @@ import youcodesafi.ma.handlingyoucodeabsencesystem.Models.Person;
 import youcodesafi.ma.handlingyoucodeabsencesystem.Models.Promotion;
 import youcodesafi.ma.handlingyoucodeabsencesystem.Models.Referencial;
 import youcodesafi.ma.handlingyoucodeabsencesystem.Models.Speciality;
+import youcodesafi.ma.handlingyoucodeabsencesystem.Models.Staff;
 
 /**
  *
@@ -43,5 +44,6 @@ public interface StaffRepository {
     public LinkedList<Groupes> getListsGroupes() throws SQLException;
     
     public int makeAbsenceByClassForOneSpecificApprenant(int Stu_ID, int class_ID, int Nbr_Hours) throws SQLException;
-
+    
+    public int addStaff(Staff p) throws SQLException;
 }

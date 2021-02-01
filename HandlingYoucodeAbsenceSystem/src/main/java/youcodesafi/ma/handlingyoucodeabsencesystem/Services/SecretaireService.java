@@ -12,7 +12,9 @@ import java.util.logging.Logger;
 import youcodesafi.ma.handlingyoucodeabsencesystem.Connection.Singleton;
 import youcodesafi.ma.handlingyoucodeabsencesystem.Enums.Role;
 import youcodesafi.ma.handlingyoucodeabsencesystem.Models.AbsenceApprenant;
+import youcodesafi.ma.handlingyoucodeabsencesystem.Models.Apprenant;
 import youcodesafi.ma.handlingyoucodeabsencesystem.Models.Person;
+import youcodesafi.ma.handlingyoucodeabsencesystem.Models.Secretary;
 import youcodesafi.ma.handlingyoucodeabsencesystem.Models.Staff;
 import youcodesafi.ma.handlingyoucodeabsencesystem.Repositories.SecretaireRepository;
 
@@ -153,5 +155,106 @@ public class SecretaireService implements SecretaireRepository {
         St = new AbsenceApprenant(nom);
         return St;
     }
+    
+        public int addSecretary(Secretary p) throws SQLException{
+            Connection connection = null;
+        PreparedStatement statement = null;
+        int state = 0;
+        int id=0; 
+        try {
+            
+            // check if the User Exists Or Not
+            // code goes here :: 
+            
+            if (_isPersonExists(p.getEmail(), p.getUsername())) {
+                System.out.println("Person is Already Exists :frowning: ");
+            } else {
+           
+                connection = Singleton.getConnection();
+                String query_POST = "INSERT INTO Person (fullname, phone, email,username,password,role) VALUES (?, ?, ?, ?, ?,?)";
+                statement = connection.prepareStatement(query_POST,PreparedStatement.RETURN_GENERATED_KEYS);
+                statement.setString(1, p.getFullname());
+                statement.setString(2, p.getPhone());
+                statement.setString(3, p.getEmail());
+                statement.setString(4, p.getUsername());
+                statement.setString(5, p.getPassword());
+                statement.setString(6, p.getRole().toString());
+                state = statement.executeUpdate();
+                ResultSet rs=statement.getGeneratedKeys();
+                while(rs.next()) {
+                id=rs.getInt(1); 
+                }
+                   
+              
+          
+              if (p.getRole().toString().equals("SECRETARY")){
+                    String query_POST2 = "INSERT INTO secretary (idPerson,Classes) VALUES (?,?)";
+                    statement = connection.prepareCall(query_POST2);
+                    statement.setInt(1, id);
+                    statement.setString(2, p.getClasses());
+                    state = statement.executeUpdate();
+                   }
+              
+            
+     
+            }} catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                connection.close();
+            }
+            if (statement != null) {
+                statement.close();
+            }
+        }
+        return state;
+    }
+    
+    
+    private boolean _isPersonExists(String email, String matricule) throws SQLException {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        boolean exist = false;
+          
+        try {
+              
+            connection = Singleton.getConnection();
+            String query_CHECK = "SELECT * FROM Person WHERE email=? OR username=?";
+            statement = connection.prepareStatement(query_CHECK);
+            statement.setString(1, email);
+            statement.setString(2, matricule);
+            resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                if (resultSet.getString(4).equals(email)) {
+                    System.out.println("Email Already Exists ");
+                    exist = true;
+                }
+                if (resultSet.getString(5).equals(matricule)) {
+                    System.out.println("Username Already Exists ");
+                    exist = true;
+                }
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                connection.close();
+            }
+            if (statement != null) {
+                statement.close();
+            }
+            if (resultSet != null) {
+                resultSet.close();
+            }
+        }
+        return exist;
+    }
+
+    @Override
+    public int addSecretary(Apprenant p) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
 
 }

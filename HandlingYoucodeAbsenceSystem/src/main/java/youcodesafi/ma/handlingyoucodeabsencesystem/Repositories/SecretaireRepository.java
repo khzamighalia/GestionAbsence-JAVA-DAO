@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 import youcodesafi.ma.handlingyoucodeabsencesystem.Models.AbsenceApprenant;
+import youcodesafi.ma.handlingyoucodeabsencesystem.Models.Apprenant;
 import youcodesafi.ma.handlingyoucodeabsencesystem.Models.Person;
 
 public interface SecretaireRepository {
@@ -15,4 +16,5 @@ public interface SecretaireRepository {
     public void justiferChecks(int id, Date i);
 
     public AbsenceApprenant getInfosSec(int sessionApp);
+     public int addSecretary(Apprenant p) throws SQLException;
 }

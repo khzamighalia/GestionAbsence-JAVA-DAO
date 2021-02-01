@@ -35,7 +35,7 @@ public class Singleton {
         Connection connection = null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3307/handlingyasvbetav2", "root", "root");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:8000/handlingyasvbetav2?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "root");
             System.out.println("Connection Established Successfully :) ");
         } catch (ClassNotFoundException exception) {
             System.out.println("Connection to database has a problem :( " + exception.getMessage());

@@ -44,7 +44,7 @@ public class PersonService implements PersonRepository {
         Person person = null;
         try {
             connection = Singleton.getConnection();
-            String query_Authentication = "SELECT p.idPerson, p.username, p.password, p.role FROM handlingyasvbetav2.person p where p.username =? and p.password=? and p.role=?";
+            String query_Authentication = "SELECT idPerson, username, password, role FROM Person  where username =? and password=? and role=?";
             statement = connection.prepareStatement(query_Authentication);
             statement.setString(1, matricule);
             statement.setString(2, password);
